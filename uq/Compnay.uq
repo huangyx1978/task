@@ -1,0 +1,42 @@
+UQ jksoft/task version='0.01' author='hyx';
+
+TUID Company (
+    id,
+    main no varchar(50),--编号
+    main name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    address varchar(200),--地址
+    telephone varchar(200),--电话
+    note varchar(500),--备注
+    disabled int,--禁用
+    unique(no),--设置不能有重复值的字段
+    index i_name (name) unique,--创建索引
+    search(no, name, seachcode, abbreviation) --定义检索字段
+    --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
+);
+
+QUERY QueryCompany (
+    key varchar(100)--参数
+)
+PAGE (
+    id bigint start 0 asc,
+    no varchar(50),--编号
+    name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    address varchar(200),--地址
+    telephone varchar(200),--电话
+    note varchar(500), --备注
+    disabled int --禁用
+) {
+    var _key varchar(100);
+    set _key = concat('%', key, '%');
+    page select a.id,a.no,a.name,a.seachcode,a.abbreviation,a.address,a.telephone,a.note,a.disabled
+        from Company as a
+        where a.id>$pageStart and (
+            a.no like _key or a.name like _key or a.seachcode like _key
+        )
+        order by a.id asc
+        limit $pageSize;
+};

@@ -1,0 +1,15 @@
+
+TUID Department (
+    id,
+    main no varchar(50),--编号
+    main name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    oompany id Company,--所属公司机构
+    ParentId int,--上级部门ID
+    note varchar(500),--备注
+    disabled int,--禁用
+    unique(no),--设置不能有重复值的字段
+    search(no, name, seachcode, abbreviation) --定义检索字段
+    --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
+);
