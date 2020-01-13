@@ -13,3 +13,4 @@ TUID Department (
     search(no, name, seachcode, abbreviation) --定义检索字段
     --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
 );
+
