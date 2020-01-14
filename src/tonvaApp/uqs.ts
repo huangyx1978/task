@@ -4,6 +4,9 @@ export interface Task {
     Company: Tuid;
     QueryCompany: Query;
     Department: Tuid;
+    QueryDepartment: Query;
+    QueryAllDepartment: Query;
+    StaffMember: Tuid;
 }
 
 export interface UQs {

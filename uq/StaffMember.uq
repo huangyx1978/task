@@ -1,0 +1,20 @@
+
+TUID StaffMember (
+    id,
+    main no varchar(50),--编号
+    main name varchar(200),--名称
+    gender int, --性别 0 不确定,1 男,2 女
+    image varchar(500), --头像
+    note varchar(500),--备注
+    disabled int,--禁用
+    ARR departmentarr
+    (
+        owner,
+        id,
+        department id Department, --所属部门
+        position varchar(100) --职位
+    ),
+    unique(no),--设置不能有重复值的字段
+    search(no, name) --定义检索字段
+    --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
+);

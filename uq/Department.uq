@@ -5,12 +5,79 @@ TUID Department (
     main name varchar(200),--名称
     seachcode varchar(200),--查询码
     abbreviation varchar(200),--简称
-    oompany id Company,--所属公司机构
-    ParentId int,--上级部门ID
+    company id Company,--所属公司机构
+    parent id Department,--上级部门
+    level int, --层级
     note varchar(500),--备注
     disabled int,--禁用
     unique(no),--设置不能有重复值的字段
     search(no, name, seachcode, abbreviation) --定义检索字段
     --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
 );
+
+QUERY QueryDepartment (
+    key varchar(100)--参数
+)
+PAGE (
+    id bigint start 0 asc,
+    no varchar(50),--编号
+    name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    company int,--所属公司机构id
+    companyno varchar(50), --所属公司机构编号
+    companyname varchar(200), --所属公司机构名称
+    parent int,--上级部门ID
+    parentno varchar(50), --上级部门编号
+    parentname varchar(200), --上级部门名称
+    level int, --层级
+    note varchar(500), --备注
+    disabled int --禁用
+) {
+    var _key varchar(100);
+    set _key = concat('%', key, '%');
+    page select a.id,a.no,a.name,a.seachcode,a.abbreviation,a.company,b.no as companyno,b.name as companyname,
+         a.parent,c.no as parentno,c.name as parentname,a.level,a.note,a.disabled
+        from Department as a
+        left join Company as b on a.company=b.id
+        left join Department as c on a.parent=c.id 
+        where a.id>$pageStart and (
+            a.no like _key or a.name like _key or a.seachcode like _key
+        )
+        order by a.id asc
+        limit $pageSize;
+};
+
+QUERY QueryAllDepartment (
+    key varchar(100)--参数
+)
+Returns Ret(
+    id bigint, --ID 
+    no varchar(50),--编号
+    name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    company int,--所属公司机构id
+    companyno varchar(50), --所属公司机构编号
+    companyname varchar(200), --所属公司机构名称
+    parent int,--上级部门ID
+    parentno varchar(50), --上级部门编号
+    parentname varchar(200), --上级部门名称
+    level int, --层级
+    note varchar(500), --备注
+    disabled int --禁用
+)
+ {
+    var _key varchar(100);
+    set _key = concat('%', key, '%');
+    into Ret select a.id,a.no,a.name,a.seachcode,a.abbreviation,a.company,b.no as companyno,b.name as companyname,
+         a.parent,c.no as parentno,c.name as parentname,a.level,a.note,a.disabled
+        from Department as a
+        left join Company as b on a.company=b.id
+        left join Department as c on a.parent=c.id 
+        where (
+            a.no like _key or a.name like _key or a.seachcode like _key
+        )
+        order by b.id asc,a.id asc;
+};
 
