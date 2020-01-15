@@ -7,7 +7,7 @@ TUID StaffMember (
     image varchar(500), --头像
     note varchar(500),--备注
     disabled int,--禁用
-    ARR departmentarr
+    ARR department
     (
         owner,
         id,
@@ -18,3 +18,46 @@ TUID StaffMember (
     search(no, name) --定义检索字段
     --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
 );
+
+QUERY QueryStaffMember (
+    key varchar(100)--参数
+)
+Returns department(
+    owner int,
+    id int,
+    department int,
+    position varchar(100)
+) 
+PAGE (
+    id bigint start 0 asc,//分页查询必需
+    no varchar(50),--编号
+    name varchar(200),--名称
+    gender int, --性别 0 不确定,1 男,2 女
+    image varchar(500), --头像
+    note varchar(500),--备注
+    disabled int
+)
+{
+    var _key varchar(100);
+    set _key = concat('%', key, '%');
+
+    TABLE temp(id int);//创建临时表
+    into temp
+    select a.id from StaffMember as a 
+    where a.id>$pageStart and (
+        a.no like _key or a.name like _key
+    ) 
+    order by a.id asc
+    limit $pageSize;
+
+    page select b.id,b.no,b.name,b.gender,b.image,b.note,b.disabled
+        from temp as a 
+        left join StaffMember as b on a.id=b.id    
+        order by b.id asc;
+
+    into department select b.owner,b.id,b.department,b.position 
+                    from temp as a 
+                    left join StaffMember.department as b on a.id=b.owner
+                    order by b.owner asc,b.id asc;
+
+};

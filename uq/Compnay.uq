@@ -20,7 +20,7 @@ QUERY QueryCompany (
     key varchar(100)--参数
 )
 PAGE (
-    id bigint start 0 asc,
+    id bigint start 0 asc,//分页查询必需指定一个id字段作为分页依据
     no varchar(50),--编号
     name varchar(200),--名称
     seachcode varchar(200),--查询码

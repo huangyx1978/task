@@ -7,6 +7,7 @@ export interface Task {
     QueryDepartment: Query;
     QueryAllDepartment: Query;
     StaffMember: Tuid;
+    QueryStaffMember:Query;
 }
 
 export interface UQs {

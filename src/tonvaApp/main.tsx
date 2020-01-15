@@ -14,22 +14,22 @@ export class VMain extends VPage<CApp> {
     // }
 
     render = (param?: any): JSX.Element => {
-        let { cHome, cMe ,cHyx/*, cPosts, cMedia, cTemplets*/ } = this.controller;
+        let { cHome, cMe ,cHyx ,cStructure /*, cPosts, cMedia, cTemplets*/ } = this.controller;
         let faceTabs = [
-            { name: 'home', label: '绩效', icon: 'tasks', content: cHome.tab },
+            { name: 'structure', label: '组织架构', icon: 'cogs', content: cStructure.tab,  onShown:cStructure.querycompanylist},//onShow指定显示时调用的方法,可在这里准备要显示的数据
             { name: 'hyx', label: '基础信息', icon: 'tasks', content: cHyx.tab },
             //    onShown:cPosts.loadList, notify: undefined },
             //{ name: 'image', label: '图片', icon: 'vcard', content: cMedia.tab, onShown:cMedia.loadList },
             //{ name: 'templet', label: '模板', icon: 'vcard', content: cTemplets.tab, onShown:cTemplets.loadList },
-            { name: 'me', label: '我的', icon: 'user', content: cMe.tab }
+            { name: 'me', label: '个人中心', icon: 'user', content: cMe.tab }
         ].map(v => {
-            let { name, label, icon, content/*, notify, onShown*/ } = v;
+            let { name, label, icon, content, onShown/*, notify, onShown*/ } = v;
             return {
                 name: name,
                 caption: (selected: boolean) => TabCaptionComponent(label, icon, color(selected)),
                 content: content,
                 //notify: notify,
-                //onShown: onShown,
+                onShown: onShown,
             }
         });
         return <Page header={false} headerClassName={"bg-info"} >

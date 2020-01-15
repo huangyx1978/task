@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { nav, Image, VPage, Prop, IconText, FA, PropGrid, LMR, Page, UiSchema, Schema, UiTextItem, Form, UiTextAreaItem, UiButton, Context } from 'tonva';
-import {CHyx} from './CHyx';
+import {CStructure} from './CStructure';
 import { stringify } from 'querystring';
 
-export class VCompanyEdit extends VPage<CHyx>{
+export class VCompanyEdit extends VPage<CStructure>{
     async open(company:any){
         this.openPage(this.page,company);
     }

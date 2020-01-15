@@ -19,7 +19,8 @@
     "noEmit": true,
     "jsx": "react",
     "baseUrl": "src",
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "experimentalDecorators": true
   },
   "include": [
     "src"

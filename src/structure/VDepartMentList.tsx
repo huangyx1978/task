@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Page, VPage, ImageUploader, Form, ItemSchema, UiSchema, UiTextItem, ButtonWidget, UiButton, NumSchema, UiTextAreaItem, List, LMR, FA, SearchBox } from 'tonva';
-import { CHyx } from './CHyx';
+import { CStructure } from './CStructure';
 
-export class VDepartMentList extends VPage<CHyx>{
+export class VDepartMentList extends VPage<CStructure>{
     private departmentlist:any[];
     /*该方法必需实现,类似老平台的initview方法,平台载入View时会调用*/
     async open(departmentlist?:any[]){
@@ -12,7 +12,7 @@ export class VDepartMentList extends VPage<CHyx>{
     /*单个数据项输出界面元素*/
     private renderDepartment=(department:any, index:number) => {
         let {no,name,companyname} = department;//将department对象的no属性,name属性,companyname属性自动赋值给同名的变量,一种语法糖,类似于C#中Json对象与类的实例自动转换,通过名称自动匹配
-        let left = <FA name="car" className="text-success mx-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
+        let left = <FA name="group" className="text-success mx-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
         let right = <span className="align-items-center">{companyname}</span>;//列表右侧显示的界面元素
         return <LMR className="px-3 py-2 align-items-center cursor-pointer" left={left} right={right} ><b className="h6">{name}</b></LMR>//输出包含左中右三个分区的列表项
     }

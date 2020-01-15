@@ -5,7 +5,8 @@ import { UQs } from "./tonvaApp/uqs";
 import { VMain } from './tonvaApp/main';
 import { CMe } from "me/CMe";
 import { CHome } from "home/CHome";
-import {CHyx} from "hyx/CHyx";
+import {CHyx} from "info/CHyx";
+import {CStructure} from "structure/CStructure";
 /*
 import { CMe } from "./me/CMe";
 import { CPosts } from "./posts/CPosts";
@@ -19,11 +20,7 @@ export class CApp extends CAppBase {
     cHome: CHome;
     cMe: CMe;
     cHyx: CHyx;
-    /*
-    cPosts: CPosts;
-    cMedia: CMedia;
-    cTemplets: CTemplets;
-    */
+    cStructure:CStructure;
 
     protected newC<T extends CUqBase>(type: IConstructor<T>): T {
         return new type(this);
@@ -32,7 +29,9 @@ export class CApp extends CAppBase {
     protected async internalStart() {
         this.cHome = this.newC(CHome);
         this.cHyx=this.newC(CHyx);
-        this.cMe = this.newC(CMe);    
+        this.cMe = this.newC(CMe);   
+        this.cStructure=this.newC(CStructure); 
+        await this.cStructure.start();//对应的是调用Control里的internalStart(),在这里初始化数据
         /*
         this.cPosts = this.newC(CPosts);
         this.cMedia = this.newC(CMedia);

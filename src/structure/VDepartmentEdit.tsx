@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { nav, Image, VPage, Prop, IconText, FA, PropGrid, LMR, Page, UiSchema, Schema, UiTextItem, Form, UiTextAreaItem, UiButton, Context, UiIdItem, UiRange, NumSchema } from 'tonva';
-import {CHyx} from './CHyx';
+import { nav, Image, VPage, Prop, IconText, FA, PropGrid, LMR, Page, UiSchema, Schema, UiTextItem, Form, UiTextAreaItem, UiButton, Context, UiIdItem, UiRange, NumSchema, tv } from 'tonva';
+import {CStructure} from './CStructure';
 import { stringify } from 'querystring';
 import { VCallCompany } from './VCallCompany';
 
-export class VDepartmentEdit extends VPage<CHyx>{
+export class VDepartmentEdit extends VPage<CStructure>{
     async open(department:any){
         this.openPage(this.page,department);
     }
@@ -29,9 +29,20 @@ export class VDepartmentEdit extends VPage<CHyx>{
         return ret;
     }
 
+    private renderCompany = (item: any) => {
+        let boxId = this.controller.boxCompany(item);//根据基础信息id获取基础信息
+        return tv(boxId,(values) => <span>{values.name}</span>);//将基础信息的内容进行组织并输出
+        //return tv(boxId);//不带第二个参数的时候内容输出格式在 tvs.tsx中定义
+    }
+    
     private departmentpickid = async (context: Context, name: string, value: number)=> {
         let ret = await this.controller.calldepartmen();
         return ret;
+    }
+
+    private renderDepartment = (item: any) => {
+        let boxId = this.controller.boxDepartment(item);//根据基础信息id获取基础信息
+        return tv(boxId,(values) => <span>{values.name}</span>);//将基础信息的内容进行组织并输出
     }
 
     private page=(department:any)=>{
@@ -41,7 +52,7 @@ export class VDepartmentEdit extends VPage<CHyx>{
        
 
         let schema: Schema=[
-            {name:'no', type:'number',required:true},
+            {name:'no', type:'string',required:true},
             {name:'name', type:'string' ,required:true},
             {name:'abbreviation', type:'string'},
             {name:'company', type:'id'},
@@ -57,8 +68,8 @@ export class VDepartmentEdit extends VPage<CHyx>{
                 no: {widget: 'text', label: '编号', placeholder: '请输入编号'} as UiTextItem,
                 name:{widget: 'text', label: '名称', placeholder: '请输入名称'} as UiTextItem,
                 abbreviation:{widget: 'text', label: '简称'} as UiTextItem,
-                company:{widget: 'id', label: '所属公司机构', pickId: this.companypickid} as UiIdItem,//通过pickId来调用打开选取公司机构的弹出窗体
-                parent:{widget: 'id', label: '上级部门', pickId: this.departmentpickid} as UiIdItem,//通过pickId来调用打开选取部门的弹出窗体
+                company:{widget: 'id', label: '所属公司机构', pickId: this.companypickid, Templet: this.renderCompany} as UiIdItem,//通过pickId来调用打开选取公司机构的弹出窗体,Templet来调用方法用于组织显示内容
+                parent:{widget: 'id', label: '上级部门', pickId: this.departmentpickid,Templet: this.renderDepartment} as UiIdItem,//通过pickId来调用打开选取部门的弹出窗体
                 level:{widget:'updown', label: '层级' },
                 note:{widget: 'textarea', label: '备注' } as UiTextAreaItem,
                 commit:{widget:'button', label: '提交',className:'btn btn-primary w-100'} as UiButton 

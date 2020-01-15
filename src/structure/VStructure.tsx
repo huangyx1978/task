@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { nav, Image, VPage, Prop, IconText, FA, PropGrid, LMR, Page } from 'tonva';
-import {CHyx} from './CHyx';
-
-
+import {CStructure} from './CStructure'
 
 const cli="list-group-item cursor-pointer";
 const Li = (caption:string,onClick:()=>void,index:number) => <li className={cli} onClick={onClick} key={index}>{caption}</li>;
@@ -11,22 +9,20 @@ interface InfoItem{
     onClick:()=>void
 }
 
-export class VHyx extends VPage<CHyx>{
-    async open(param?: any) {
+export class VStructure extends VPage<CStructure>{
+   async open(param?: any){
         
     }
 
     private arr:InfoItem[]=[
         {caption:"公司机构",onClick:this.controller.showCompany},
         {caption:"部门",onClick:this.controller.showDepartment},
-        {caption:"职员",onClick:this.controller.showStaffMember},
-        {caption:"产品",onClick:this.controller.showProduct},
-        {caption:"客户",onClick:this.controller.showCustomer}
+        {caption:"职员",onClick:this.controller.showStaffMember}
     ]
 
 
     render(){
-        return <Page header="基础信息" headerClassName="bg-info">
+        return <Page header="组织架构" headerClassName="bg-info">
             <div>
             <ul className="list-group">
                 {this.arr.map((v,index)=>{
