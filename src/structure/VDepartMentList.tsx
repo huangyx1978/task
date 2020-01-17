@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Page, VPage, ImageUploader, Form, ItemSchema, UiSchema, UiTextItem, ButtonWidget, UiButton, NumSchema, UiTextAreaItem, List, LMR, FA, SearchBox } from 'tonva';
+import { Page, VPage, ImageUploader, Form, ItemSchema, UiSchema, UiTextItem, ButtonWidget, UiButton, NumSchema, UiTextAreaItem, List, LMR, FA, SearchBox, tv } from 'tonva';
 import { CStructure } from './CStructure';
+import { values } from 'mobx';
 
 export class VDepartMentList extends VPage<CStructure>{
     private departmentlist:any[];
@@ -11,9 +12,9 @@ export class VDepartMentList extends VPage<CStructure>{
     }
     /*单个数据项输出界面元素*/
     private renderDepartment=(department:any, index:number) => {
-        let {no,name,companyname} = department;//将department对象的no属性,name属性,companyname属性自动赋值给同名的变量,一种语法糖,类似于C#中Json对象与类的实例自动转换,通过名称自动匹配
-        let left = <FA name="group" className="text-success mx-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
-        let right = <span className="align-items-center">{companyname}</span>;//列表右侧显示的界面元素
+        let {no,name,company} = department;//将department对象的no属性,name属性,companyname属性自动赋值给同名的变量,一种语法糖,类似于C#中Json对象与类的实例自动转换,通过名称自动匹配
+        let left = <FA name="group" className="text-success mr-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
+        let right = <span className="align-items-center">{tv(company,(values)=>values.name)}</span>;//列表右侧显示的界面元素
         return <LMR className="px-3 py-2 align-items-center cursor-pointer" left={left} right={right} ><b className="h6">{name}</b></LMR>//输出包含左中右三个分区的列表项
     }
 

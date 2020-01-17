@@ -133,7 +133,7 @@ export class CStructure extends CUqBase{
     department: any;
 
     showDepartment =async ()=>{
-        this.pager=new QueryPager(this.uqs.task.QueryDepartment, 10, 30);
+        this.pager=new QueryPager(this.uqs.task.QueryDepartments, 10, 30);
         this.pager.setItemDeepObservable();
         this.pager.first({key:''})
         this.openVPage(VDepartMentList);
@@ -241,6 +241,11 @@ export class CStructure extends CUqBase{
         let ret= await this.uqs.task.StaffMember.save(id, staff);//id传-1或0是显示表示新增,id>0显示的更新,id为undefined则先拿no查id,然后以id来进行更新,如果查不要id则新增
         if(ret.id>0)//ret.id为保存后返回的的基础信息id,id=0表示失败,id>0表示成功,id<0表示为做任何更改,ret.inid调用save方法是传入的原始id值,
         {
+            await this.uqs.task.SaveStaffDepartment.submit({
+                arr1:[
+                    {staff:1,department:1,level:1}
+                ]
+            });
             if(id<0)//新增的            
             {   
                 this.staff.id= ret.id;

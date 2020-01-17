@@ -1,7 +1,8 @@
 {
-  "name": "task",
+  "name": "taskinfo",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
@@ -20,7 +21,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "tonva": "^1.1.93",
+    "tonva": "^1.1.99",
     "typescript": "^3.7.4"
   },
   "scripts": {

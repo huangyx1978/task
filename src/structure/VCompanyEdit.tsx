@@ -54,7 +54,7 @@ export class VCompanyEdit extends VPage<CStructure>{
         let caption=company.id<0?'新增公司机构':company.name;
 
         return <Page header={caption} headerClassName="bg-primary" back="close">
-            <Form schema={schema} uiSchema={uis} formData={formdate} fieldLabelSize={2} onButtonClick={this.buttonclick} className="m-5"/>
+            <Form schema={schema} uiSchema={uis} formData={formdate} fieldLabelSize={2} onButtonClick={this.buttonclick} className="m-3"/>
         </Page>
     }
 }

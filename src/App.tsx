@@ -11,7 +11,7 @@ const App: React.FC = () => {
     const onLogined = async () => {
         await start(CApp, appConfig);
     }
-    return <NavView onLogined={onLogined} /*notLogined={onLogined}*/ />;
+    return <NavView onLogined={onLogined} notLogined={onLogined} />;
 }
 
 export default App;

@@ -6,11 +6,13 @@ export interface Task {
     Department: Tuid;
     QueryDepartment: Query;
     QueryAllDepartment: Query;
+    QueryDepartments: Query;
     StaffMember: Tuid;
     QueryStaffMember:Query;
+    SaveStaffDepartment:Action;
 }
 
 export interface UQs {
-    task: Task
+    task: Task;
 }
 

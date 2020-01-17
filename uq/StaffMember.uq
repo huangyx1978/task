@@ -19,6 +19,30 @@ TUID StaffMember (
     --index 索引名称(字段名1,字段名2) 其他参数--自定义索引
 );
 
+MAP StaffDepartment ver 1.0(
+    KEY Staff ID StaffMember,
+    KEY Department ID Department,
+    level int
+);
+
+ACTION SaveStaffDepartment(
+    ARR arr1(
+    staff ID StaffMember,
+    department ID Department,
+    level int)
+)
+RETURNS rets(
+    ret int
+)
+{
+    FOREACH arr1{
+        --BOOK 账名 at(关键字值1,关键字值2,....) set 字段名称1=值,字段名称2+=值,字段名称3-=值
+        BOOK StaffDepartment at(staff,department) set level+=level del if level=0;-- level+=level 表示加账, level-=level 表示减账 level=level表示更新
+        --DELETE from 账名称 where 条件 
+        
+    }
+};
+
 QUERY QueryStaffMember (
     key varchar(100)--参数
 )

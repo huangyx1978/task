@@ -17,11 +17,11 @@ export class VCallDepartment extends VPage<CStructure> {
 
     /*页面滚动到底部时触发的操作*/
     private onScrollBottom = () => {
-       this.controller.pager.more();//执行下一页的查询
+       this.controller.callpager.more();//执行下一页的查询
     }
 
      private onseach= async (seachkey:string)=>{
-       await this.controller.pager.first({key:seachkey});//将参数包装成一个Json对象的属性
+       await this.controller.callpager.first({key:seachkey});//将参数包装成一个Json对象的属性
     }
 
 
@@ -36,7 +36,7 @@ export class VCallDepartment extends VPage<CStructure> {
         return <Page header={header} headerClassName="bg-primary align-middle" onScrollBottom={this.onScrollBottom}>
             {/*输出列表,其中属性items为数据集合,属性item为遍历数据集合时调用的输出界面元素的方法,
             该方法两个参数,第一个参数就是遍历数据集合时当前数据项,第二个参数为数据项在集合中的索引*/}
-            <List items={this.controller.pager} item={{render: this.renderDepartment, onClick: this.onItemClick} }/> 
+            <List items={this.controller.callpager} item={{render: this.renderDepartment, onClick: this.onItemClick} }/> 
         </Page>
 
     }

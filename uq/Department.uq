@@ -81,3 +81,29 @@ Returns Ret(
         order by b.id asc,a.id asc;
 };
 
+
+QUERY QueryDepartments (
+    key varchar(100)--参数
+)
+PAGE (
+    id bigint start 0 asc,
+    no varchar(50),--编号
+    name varchar(200),--名称
+    seachcode varchar(200),--查询码
+    abbreviation varchar(200),--简称
+    company ID Company,--所属公司机构
+    parent ID Department,--上级部门
+    level int, --层级
+    note varchar(500), --备注
+    disabled int --禁用
+) {
+    var _key varchar(100);
+    set _key = concat('%', key, '%');
+    page select a.id,a.no,a.name,a.seachcode,a.abbreviation,a.company,a.parent,a.level,a.note,a.disabled
+        from Department as a
+        where a.id>$pageStart and (
+            a.no like _key or a.name like _key or a.seachcode like _key
+        )
+        order by a.id asc
+        limit $pageSize;
+};

@@ -79,7 +79,7 @@ export class VDepartmentEdit extends VPage<CStructure>{
         let caption=department.id<0?'新增部门':department.name;
 
         return <Page header={caption} headerClassName="bg-primary" back="close">
-            <Form schema={schema} uiSchema={uis} formData={formdate} fieldLabelSize={2} onButtonClick={this.buttonclick} className="m-5"/>
+            <Form schema={schema} uiSchema={uis} formData={formdate} fieldLabelSize={2} onButtonClick={this.buttonclick} className="m-3"/>
         </Page>
     }
 }

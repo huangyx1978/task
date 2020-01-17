@@ -55,7 +55,7 @@ export class VCompanyList extends VPage<CStructure>{
     private renderCompany=(company:any, index:number) => {
         //let {a1:no, a2:name} = company;//使用冒号可以进行变量更名
         let {no,name,telephone} = company;//将company对象的no属性,name属性,telephone属性自动赋值给同名的变量,一种语法糖,类似于C#中Json对象与类的实例自动转换,通过名称自动匹配
-        let left = <FA name="bank" className="text-success mx-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
+        let left = <FA name="bank" className="text-success mr-2" fixWidth={true} size="lg" />;//列表左侧显示当地界面元素
         let right = <span className="align-items-center">{telephone}</span>;//列表右侧显示的界面元素
         return <LMR className="px-3 py-2 align-items-center cursor-pointer" left={left} right={right} ><b className="h6">{name}</b></LMR>//输出包含左中右三个分区的列表项
     }
