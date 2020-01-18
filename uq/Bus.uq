@@ -1,0 +1,8 @@
+BUS taskbus ver 0.1 FROM jksoft/TaskBus
+    ACCEPT taskintegral{
+        foreach taskdetail
+        {
+        BOOK StafftInegral at(staff) set integral+=integral;
+        };
+    }
+;

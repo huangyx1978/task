@@ -1,0 +1,4 @@
+BOOK StafftInegral(
+    KEY Staff ID StaffMember,
+    integral int
+);

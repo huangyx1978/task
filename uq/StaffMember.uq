@@ -37,7 +37,7 @@ RETURNS rets(
 {
     FOREACH arr1{
         --BOOK 账名 at(关键字值1,关键字值2,....) set 字段名称1=值,字段名称2+=值,字段名称3-=值
-        BOOK StaffDepartment at(staff,department) set level+=level del if level=0;-- level+=level 表示加账, level-=level 表示减账 level=level表示更新
+        BOOK StaffDepartment AT(staff, department) SET level += level; --  del if level=0; -- level+=level 表示加账, level-=level 表示减账 level=level表示更新
         --DELETE from 账名称 where 条件 
         
     }
